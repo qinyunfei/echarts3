@@ -62,10 +62,10 @@ public class ReadExcel {
    * @return
  * @throws IOException 
    */
-  public List<Map<Integer, Object>> getExcelInfo(int i){
+  public List<Map<String, Object>> getExcelInfo(int i){
 
        //初始化客户信息的集合    
-       List<Map<Integer, Object>> list=new ArrayList<Map<Integer, Object>>();
+       List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
        list =readExcelValue(i);
       return list;
   }
@@ -75,21 +75,25 @@ public class ReadExcel {
    * @param wb
    * @return
    */
-  private List<Map<Integer, Object>> readExcelValue(int i){ 
+  private List<Map<String, Object>> readExcelValue(int i){ 
 
-       List<Map<Integer, Object>> list=new ArrayList<Map<Integer, Object>>();//声明一个对象集合     
+       List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();//声明一个对象集合  
+      
       //循环Excel行数,从第二行开始。标题不入库
        for(int r=i;r<totalRows;r++){
            Row row = sheet.getRow(r);
            if (row == null) continue;
-           Map<Integer, Object> map =new HashMap<Integer, Object>();
+           Map<String, Object> map =new HashMap<String, Object>();
+           List<String> lists=new ArrayList<String>();//声明一个对象集合     
            //循环Excel的列
            for(int c = 0; c <this.totalCells; c++){ 
                Cell cell = row.getCell(c);
                if (null != cell){
-            	   map.put(c, getValue(cell));
+            	   map.put("s"+c, getValue(cell));
+            	   lists.add(getValue(cell));
                }
            }
+           map.put("lists", lists);
            //添加对象到集合中
            list.add(map);
        }
