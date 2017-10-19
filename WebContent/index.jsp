@@ -8,6 +8,6 @@
 </head>
 <body>
   <a href="${pageContext.request.contextPath }/reports/topage">helloword</a>
-  fz_1
+  ycck_1
 </body>
 </html>
